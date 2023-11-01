@@ -24,18 +24,18 @@ steps:
   commands:
   - sleep 5 ## give docker enough time to start
   - docker login -u login_docker -p docker_pass #ou qualquer registry
-  - docker build  -t claudioferejes/poc-site:${DRONE_COMMIT_SHA:0:7} .
-  - docker push claudioferejes/poc-site:${DRONE_COMMIT_SHA:0:7}
+  - docker build  -t claudioferejes/argocd-site-poc-dev:${DRONE_COMMIT_SHA:0:7} .
+  - docker push claudioferejes/argocd-site-poc-dev:${DRONE_COMMIT_SHA:0:7}
 
 
 ######################################################   Delivery
 - name: delivery
   image: claudioferejes/plugin-drone:5.0
   commands:
-  - git clone git@github.com:claudioferejes/argocd-site-poc.git
+  - git clone git@github.com:claudioferejes/argocd-site-poc-dev.git
   - cd argocd-site-poc
-  - sed -E -i.bak 's%(claudioferejes/poc-site:).*%claudioferejes/poc-site:${DRONE_COMMIT_SHA:0:7}%' site-helm/templates/uzi-poc-site-deployment.yml
-  - git add . && git commit -m "Change image site-poc to claudioferejes/poc-site:${DRONE_COMMIT_SHA:0:7}" && git push
+  - sed -E -i.bak 's%(claudioferejes/argocd-site-poc-dev:).*%claudioferejes/argocd-site-poc-dev:${DRONE_COMMIT_SHA:0:7}%' site-helm/templates/uzi-poc-site-deployment.yml
+  - git add . && git commit -m "Change image site-poc to claudioferejes/argocd-site-poc-dev:${DRONE_COMMIT_SHA:0:7}" && git push
 
 
 ########################################################   Services   
