@@ -23,7 +23,7 @@ steps:
   privileged: true
   commands:
   - sleep 5 ## give docker enough time to start
-  - docker login -u claudioferejes -p dckr_pat_FYjSuX2k3qk51PnnHXooGXSv17c #ou qualquer registry
+  - docker login -u claudioferejes -p Aline#060831 #ou qualquer registry
   - docker build  -t claudioferejes/poc-site:${DRONE_COMMIT_SHA:0:7} .
   - docker push claudioferejes/poc-site:${DRONE_COMMIT_SHA:0:7}
 
